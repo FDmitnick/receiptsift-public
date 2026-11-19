@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>ReceiptSift Operations</title>
+    <link rel="stylesheet" href="/admin.css?v=3" />
+    <link rel="stylesheet" href="/admin-diagnostics.css?v=2" />
+  </head>
+  <body data-admin-page="overview">
+    <aside class="ops-sidebar" id="opsSidebar">
+      <a class="ops-brand" href="/admin" aria-label="ReceiptSift Operations" data-i18n-aria-label="ReceiptSift Operations">
+        <span>RS</span>
+        <span class="brand-copy"><b>ReceiptSift</b><small data-i18n="Operations">Operations</small></span>
+      </a>
+
+      <nav class="ops-nav" aria-label="Operations navigation" data-i18n-aria-label="Operations navigation">
+        <p data-i18n="Business">Business</p>
+        <a href="/admin" data-admin-link="overview"><span data-i18n="Overview">Overview</span><small data-i18n="Business pulse">Business pulse</small></a>
+        <a href="/admin/runtime" data-admin-link="runtime"><span data-i18n="Parsing operations">Parsing operations</span><small data-i18n="Health and AI cost">Health and AI cost</small></a>
+        <a href="/admin/users" data-admin-link="users"><span data-i18n="Customers and usage">Customers and usage</span><small data-i18n="Accounts and limits">Accounts and limits</small></a>
+        <a href="/admin/billing" data-admin-link="billing"><span data-i18n="Subscriptions and revenue">Subscriptions and revenue</span><small data-i18n="Payments and refunds">Payments and refunds</small></a>
+        <a href="/admin/traffic" data-admin-link="traffic"><span data-i18n="Growth and conversion">Growth and conversion</span><small data-i18n="Visits and events">Visits and events</small></a>
+
+        <p data-i18n="Support and control">Support and control</p>
+        <a href="/admin/diagnostics" data-admin-link="diagnostics"><span data-i18n="Issues and diagnostics">Issues and diagnostics</span><small data-i18n="User-reported cases">User-reported cases</small><b class="nav-count hidden" id="diagnosticsNavCount"></b></a>
+        <a href="/admin/audit" data-admin-link="audit"><span data-i18n="Risk and audit">Risk and audit</span><small data-i18n="Owner actions">Owner actions</small></a>
+      </nav>
+
+      <div class="sidebar-status">
+        <span><i></i><span data-i18n="Console access protected">Console access protected</span></span>
+        <small data-i18n="Owner only">Owner only</small>
+      </div>
+    </aside>
+    <button class="sidebar-backdrop" id="sidebarBackdrop" type="button" aria-label="Close navigation" data-i18n-aria-label="Close navigation"></button>
+
+    <div class="ops-workspace">
+      <header class="ops-topbar">
+        <div class="topbar-context">
+          <button class="menu-button" id="menuButton" type="button" aria-controls="opsSidebar" aria-expanded="false" data-i18n="Menu">Menu</button>
+          <div><small data-i18n="OPERATIONS">OPERATIONS</small><b id="pageLabel">Overview</b></div>
+        </div>
+        <div class="topbar-actions">
+          <label class="range-control" id="rangeControl"><span data-i18n="Reporting window">Reporting window</span><select id="rangeSelect"><option value="7" data-i18n="Last 7 days">Last 7 days</option><option value="30" selected data-i18n="Last 30 days">Last 30 days</option><option value="90" data-i18n="Last 90 days">Last 90 days</option><option value="365" data-i18n="Last 12 months">Last 12 months</option></select></label>
+          <button id="languageToggle" type="button" aria-label="Switch to Chinese">中文</button>
+          <button id="refreshButton" type="button" data-i18n="Refresh">Refresh</button>
+          <button id="logoutButton" type="button" data-i18n="Sign out">Sign out</button>
+        </div>
+      </header>
+
+      <main class="ops-main">
+        <p class="ops-message" id="opsMessage" role="status"></p>
+
+        <section class="ops-view" data-admin-view="overview">
+          <div class="page-heading"><div><h1 data-i18n="Overview">Overview</h1><p data-i18n="See business health, customer activity, and revenue in one glance.">See business health, customer activity, and revenue in one glance.</p></div></div>
+          <section class="metric-grid overview-metrics" id="metricGrid" aria-label="Operations summary" data-i18n-aria-label="Operations summary"></section>
+          <section class="insight-grid overview-insights">
+            <section class="ops-panel chart-panel">
+              <div class="panel-heading"><div><h2 data-i18n="Business trend">Business trend</h2><p data-i18n="Daily visitors, registrations, and parsed PDFs">Daily visitors, registrations, and parsed PDFs</p></div><div class="chart-legend" id="overviewTrendLegend"></div></div>
+              <div class="chart-stage" id="overviewTrendChart" aria-live="polite"></div>
+            </section>
+            <section class="ops-panel signal-panel">
+              <div class="panel-heading"><div><h2 data-i18n="Business signals">Business signals</h2><p data-i18n="Period ratios for prioritization, not cohort conversion">Period ratios for prioritization, not cohort conversion</p></div></div>
+              <div class="signal-list" id="businessSignals"></div>
+            </section>
+          </section>
+          <section class="ops-panel funnel-panel">
+            <div class="panel-heading"><div><h2 data-i18n="Period journey">Period journey</h2><p data-i18n="Scale comparison only; stages are not cohort-attributed">Scale comparison only; stages are not cohort-attributed</p></div></div>
+            <div class="funnel" id="overviewFunnel"></div>
+          </section>
+        </section>
+
+        <section class="ops-view" data-admin-view="runtime" hidden>
+          <div class="page-heading"><div><h1 data-i18n="Parsing operations">Parsing operations</h1><p data-i18n="Monitor parser health, infrastructure capacity, model usage, and spend.">Monitor parser health, infrastructure capacity, model usage, and spend.</p></div></div>
+          <section class="metric-grid runtime-metrics" id="runtimeGrid" aria-label="Runtime summary" data-i18n-aria-label="Runtime summary"></section>
+          <section class="insight-grid runtime-insights">
+            <section class="ops-panel chart-panel">
+              <div class="panel-heading"><div><h2 data-i18n="Cost and workload trend">Cost and workload trend</h2><p data-i18n="Processed PDF pages and estimated provider cost by UTC day">Processed PDF pages and estimated provider cost by UTC day</p></div><div class="chart-legend" id="runtimeTrendLegend"></div></div>
+              <div class="chart-stage" id="runtimeTrendChart" aria-live="polite"></div>
+            </section>
+            <section class="ops-panel signal-panel">
+              <div class="panel-heading"><div><h2 data-i18n="System health">System health</h2><p data-i18n="Capacity decisions and operating guardrails">Capacity decisions and operating guardrails</p></div></div>
+              <div class="health-list" id="runtimeHealth"></div>
+            </section>
+          </section>
+          <section class="ops-panel">
+            <div class="panel-heading"><div><h2 data-i18n="AI usage and cost">AI usage and cost</h2><p data-i18n="UTC days; costs are estimated from provider token usage">UTC days; costs are estimated from provider token usage</p></div></div>
+            <div class="metric-grid compact-metrics" id="aiUsageGrid" aria-label="AI usage and cost summary" data-i18n-aria-label="AI usage and cost summary"></div>
+            <div class="table-wrap"><table><thead><tr><th data-i18n="UTC date">UTC date</th><th data-i18n="Processed images">Processed images</th><th data-i18n="Input tokens">Input tokens</th><th data-i18n="Output tokens">Output tokens</th><th data-i18n="Total tokens">Total tokens</th><th data-i18n="Model calls">Model calls</th><th data-i18n="Estimated cost">Estimated cost</th></tr></thead><tbody id="aiUsageDailyBody"><tr><td class="empty" colspan="7" data-i18n="Loading data...">Loading data...</td></tr></tbody></table></div>
+          </section>
+        </section>
+
+        <section class="ops-view" data-admin-view="users" hidden>
+          <div class="page-heading"><div><h1 data-i18n="Customers and usage">Customers and usage</h1><p data-i18n="Find an account and understand its plan, usage, and recent activity.">Find an account and understand its plan, usage, and recent activity.</p></div><label class="search"><span data-i18n="Search email">Search email</span><input id="userSearch" type="search" placeholder="name@example.com" /></label></div>
+          <section class="ops-panel table-panel">
+            <div class="table-wrap"><table><thead><tr><th data-i18n="User">User</th><th data-i18n="Plan">Plan</th><th data-i18n="This month">This month</th><th data-i18n="Saved">Saved</th><th data-i18n="Last active">Last active</th><th data-i18n="Joined">Joined</th></tr></thead><tbody id="usersBody"><tr><td class="empty" colspan="6" data-i18n="Loading data...">Loading data...</td></tr></tbody></table></div>
+            <footer class="pagination hidden" id="usersPagination"></footer>
+          </section>
+        </section>
+
+        <section class="ops-view" data-admin-view="billing" hidden>
+          <div class="page-heading"><div><h1 data-i18n="Subscriptions and revenue">Subscriptions and revenue</h1><p data-i18n="Review payments, subscription state, cancellations, and refunds.">Review payments, subscription state, cancellations, and refunds.</p></div></div>
+          <section class="ops-panel table-panel">
+            <div class="panel-toolbar"><label><span data-i18n="Owner password for payment actions">Owner password for payment actions</span><input id="ownerActionPassword" type="password" autocomplete="current-password" /></label><small data-i18n="Refunds and cancellations require manual confirmation">Refunds and cancellations require manual confirmation</small></div>
+            <div class="table-wrap"><table><thead><tr><th data-i18n="Payer">Payer</th><th data-i18n="Payment">Payment</th><th data-i18n="Amount">Amount</th><th data-i18n="Status">Status</th><th data-i18n="Paid">Paid</th><th data-i18n="Action">Action</th></tr></thead><tbody id="paymentsBody"><tr><td class="empty" colspan="6" data-i18n="Loading data...">Loading data...</td></tr></tbody></table></div>
+            <footer class="pagination hidden" id="paymentsPagination"></footer>
+          </section>
+        </section>
+
+        <section class="ops-view" data-admin-view="traffic" hidden>
+          <div class="page-heading"><div><h1 data-i18n="Growth and conversion">Growth and conversion</h1><p data-i18n="Follow the path from visit to registration, successful parsing, and payment.">Follow the path from visit to registration, successful parsing, and payment.</p></div><label><span data-i18n="Event">Event</span><select id="eventFilter"><option value="" data-i18n="All events">All events</option><option value="page_view" data-i18n="Page views">Page views</option><option value="cta_click" data-i18n="CTA clicks">CTA clicks</option><option value="pricing_view" data-i18n="Pricing views">Pricing views</option><option value="account_registered" data-i18n="Registrations">Registrations</option><option value="account_login" data-i18n="Logins">Logins</option></select></label></div>
+          <section class="ops-panel funnel-panel">
+            <div class="panel-heading"><div><h2 data-i18n="Period journey">Period journey</h2><p data-i18n="Scale comparison only; stages are not cohort-attributed">Scale comparison only; stages are not cohort-attributed</p></div></div>
+            <div class="funnel" id="trafficFunnel"></div>
+          </section>
+          <section class="ops-panel table-panel">
+            <div class="table-wrap"><table><thead><tr><th data-i18n="Visitor / user">Visitor / user</th><th data-i18n="Event">Event</th><th data-i18n="Page">Page</th><th data-i18n="Detail">Detail</th><th data-i18n="Source">Source</th><th data-i18n="Time">Time</th></tr></thead><tbody id="eventsBody"><tr><td class="empty" colspan="6" data-i18n="Loading data...">Loading data...</td></tr></tbody></table></div>
+            <footer class="pagination hidden" id="eventsPagination"></footer>
+          </section>
+        </section>
+
+        <section class="ops-view" data-admin-view="diagnostics" hidden>
+          <div class="page-heading"><div><h1 data-i18n="Issues and diagnostics">Issues and diagnostics</h1><p data-i18n="Review user-reported extraction problems before encrypted evidence expires.">Review user-reported extraction problems before encrypted evidence expires.</p></div><small data-i18n="Encrypted evidence, maximum 14-day retention">Encrypted evidence, maximum 14-day retention</small></div>
+          <section class="ops-panel table-panel">
+            <div class="table-wrap"><table><thead><tr><th data-i18n="Case">Case</th><th data-i18n="User">User</th><th data-i18n="Parser">Parser</th><th data-i18n="Evidence">Evidence</th><th data-i18n="Expires">Expires</th><th data-i18n="Action">Action</th></tr></thead><tbody id="diagnosticsBody"><tr><td class="empty" colspan="6" data-i18n="Loading data...">Loading data...</td></tr></tbody></table></div>
+            <footer class="pagination hidden" id="diagnosticsPagination"></footer>
+          </section>
+        </section>
+
+        <section class="ops-view" data-admin-view="audit" hidden>
+          <div class="page-heading"><div><h1 data-i18n="Risk and audit">Risk and audit</h1><p data-i18n="Trace high-risk owner actions without exposing receipt contents.">Trace high-risk owner actions without exposing receipt contents.</p></div><small data-i18n="High-risk actions are retained for accountability">High-risk actions are retained for accountability</small></div>
+          <section class="ops-panel table-panel">
+            <div class="table-wrap"><table><thead><tr><th data-i18n="Owner">Owner</th><th data-i18n="Action">Action</th><th data-i18n="Target">Target</th><th data-i18n="Detail">Detail</th><th data-i18n="Time">Time</th></tr></thead><tbody id="auditBody"><tr><td class="empty" colspan="5" data-i18n="Loading data...">Loading data...</td></tr></tbody></table></div>
+            <footer class="pagination hidden" id="auditPagination"></footer>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <dialog id="refundDialog">
+      <form method="dialog" id="refundForm">
+        <div class="dialog-heading"><p data-i18n="MANUAL PAYPAL REFUND">MANUAL PAYPAL REFUND</p><h2 data-i18n="Confirm the refund">Confirm the refund</h2><button type="button" id="closeRefund" aria-label="Close" data-i18n-aria-label="Close">×</button></div>
+        <p id="refundPaymentLabel"></p>
+        <label><span data-i18n="Refund amount">Refund amount</span><input id="refundAmount" name="amount" inputmode="decimal" required /></label>
+        <label><span data-i18n="Reason">Reason</span><textarea id="refundReason" name="reason" minlength="3" maxlength="180" required></textarea></label>
+        <label><span><span data-i18n="Type">Type</span> <b>REFUND</b> <span data-i18n="to confirm">to confirm</span></span><input id="refundConfirmation" name="confirmation" autocomplete="off" required /></label>
+        <p class="dialog-warning" data-i18n="This sends a real request to PayPal. It cannot be undone here.">This sends a real request to PayPal. It cannot be undone here.</p>
+        <div class="dialog-actions"><button type="button" id="cancelRefund" data-i18n="Cancel">Cancel</button><button class="danger" type="submit" data-i18n="Send refund">Send refund</button></div>
+      </form>
+    </dialog>
+
+    <dialog id="diagnosticDetailDialog">
+      <div class="diagnostic-detail">
+        <div class="dialog-heading"><p data-i18n="ENCRYPTED DIAGNOSTIC EVIDENCE">ENCRYPTED DIAGNOSTIC EVIDENCE</p><h2 id="diagnosticDetailTitle">Diagnostic case</h2><button type="button" id="closeDiagnosticDetail" aria-label="Close" data-i18n-aria-label="Close">×</button></div>
+        <p id="diagnosticDetailMeta"></p>
+        <h3 data-i18n="User description">User description</h3><p class="diagnostic-description" id="diagnosticDescription"></p>
+        <h3 data-i18n="Original and corrected result">Original and corrected result</h3><pre id="diagnosticResult"></pre>
+        <div class="dialog-actions"><a class="dialog-link hidden" id="downloadDiagnosticPdf" href="#" data-i18n="Download source PDF">Download source PDF</a><button class="danger" id="deleteDiagnosticCase" type="button" data-i18n="Delete case">Delete case</button><button id="doneDiagnosticDetail" type="button" data-i18n="Done">Done</button></div>
+      </div>
+    </dialog>
+
+    <script src="/admin.js?v=7" defer></script>
+  </body>
+</html>

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f5f5f7" />
+    <meta name="description" content="Extract merchant, date, tax, totals, and line items from PDF receipts. Review every source, correct the data, and export a clean CSV." />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="ReceiptSift — PDF receipt parser" />
+    <meta property="og:description" content="Turn PDF receipts into reviewable, editable data with source-linked fields and CSV export." />
+    <meta property="og:url" content="{{BASE_URL}}/" />
+    <link rel="canonical" href="{{BASE_URL}}/" />
+    <title>PDF Receipt Parser &amp; Bill Data Extractor | ReceiptSift</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Outfit:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/seo.css?v=2" />
+    <link rel="stylesheet" href="/content.css?v=1" />
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"ReceiptSift","url":"{{BASE_URL}}/","applicationCategory":"BusinessApplication","operatingSystem":"Web","description":"A PDF receipt and bill parser with source-linked review and CSV export.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-nav">
+      <a class="wordmark" href="/" aria-label="ReceiptSift home"><span class="mark"><i></i><i></i></span>ReceiptSift</a>
+      <nav aria-label="Primary navigation">
+        <a href="/resources" data-en="Resources" data-zh="资源">Resources</a>
+        <a href="#how" data-en="How it works" data-zh="使用方式">How it works</a>
+        <a href="#privacy" data-en="Privacy" data-zh="隐私">Privacy</a>
+        <button class="language" id="siteLanguage" type="button">中文</button>
+        <a class="nav-cta" href="/batches" data-en="Open workspace" data-zh="打开工作台">Open workspace</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="seo-hero">
+        <div class="hero-copy">
+          <p class="eyebrow" data-en="PDF RECEIPT PARSER" data-zh="PDF 账单与收据解析">PDF RECEIPT PARSER</p>
+          <h1 data-en="Receipt data you can verify." data-zh="每一条数据，都能对照原文。">Receipt data<br />you can verify.</h1>
+          <p class="lead" data-en="Turn one PDF or a full batch of receipts, bills, and invoices into source-linked fields. Review only the exceptions, correct them, then export accountant-ready data." data-zh="将单份或整批收据、账单与发票转换为可对照原文的字段。只复核异常项，修正后导出会计可用数据。">Turn one PDF or a full batch of receipts, bills, and invoices into source-linked fields. Review only the exceptions, correct them, then export accountant-ready data.</p>
+          <div class="hero-actions"><a class="button dark" href="/batches" data-en="Open batch workspace" data-zh="打开批量工作台">Open batch workspace</a><a class="text-link" href="/app" data-en="Try one document →" data-zh="解析单份文件 →">Try one document →</a></div>
+          <p class="trust-line" data-en="Single-document and batch history is encrypted for up to 7 days, with earlier deletion available anytime." data-zh="单份和批量历史均加密保存最多 7 天，也可随时提前删除。">Single-document and batch history is encrypted for up to 7 days, with earlier deletion available anytime.</p>
+        </div>
+        <div class="receipt-scene" aria-label="A receipt becoming structured data">
+          <article class="paper receipt">
+            <small>RECEIPT · AUSTIN, TX</small><h2>Cedar &amp; Finch<br />Kitchen</h2><p>08/18/2026&nbsp;&nbsp; 7:42 PM</p>
+            <div class="rule"></div><p class="line"><span>Market salad</span><b>$12.00</b></p><p class="line"><span>House pasta</span><b>$13.00</b></p><p class="line"><span>Tax</span><b>$2.06</b></p><div class="rule"></div><p class="total"><span>TOTAL</span><b>$27.06</b></p>
+          </article>
+          <div class="field merchant"><small>MERCHANT</small><b>Cedar &amp; Finch Kitchen</b><span>98% confidence</span></div>
+          <div class="field amount"><small>TOTAL</small><b>$27.06</b><span>Source linked</span></div>
+          <div class="stamp">REVIEWED</div>
+        </div>
+      </section>
+
+      <section class="proof-strip" aria-label="Product capabilities">
+        <div><b data-en="Text + scanned PDFs" data-zh="文字与扫描 PDF">Text + scanned PDFs</b><span data-en="Built-in OCR when a text layer is missing" data-zh="缺少文字层时自动使用 OCR">Built-in OCR when a text layer is missing</span></div>
+        <div><b data-en="Source-linked fields" data-zh="字段关联原文">Source-linked fields</b><span data-en="See where every extracted value came from" data-zh="查看每一项数据来自原文何处">See where every extracted value came from</span></div>
+        <div><b data-en="Editable CSV export" data-zh="可编辑并导出 CSV">Editable CSV export</b><span data-en="Correct first, then use the data anywhere" data-zh="修正后再将数据用于其他工具">Correct first, then use the data anywhere</span></div>
+      </section>
+
+      <section class="dark-section" id="how">
+        <div class="section-heading"><p>HOW IT WORKS</p><h2 data-en="From PDF to clean rows in three steps." data-zh="三步，把 PDF 变成整洁数据。">From PDF to clean rows<br />in three steps.</h2></div>
+        <ol class="steps">
+          <li><span>01</span><div><h3 data-en="Upload" data-zh="上传">Upload</h3><p data-en="Choose a text-based or scanned PDF receipt up to 20 MB." data-zh="选择不超过 20 MB 的文字型或扫描版 PDF 收据。">Choose a text-based or scanned PDF receipt up to 20 MB.</p></div></li>
+          <li><span>02</span><div><h3 data-en="Review" data-zh="核对">Review</h3><p data-en="Check confidence, highlight the original source, and fix any field." data-zh="查看可信度、高亮原文位置，并修正任何字段。">Check confidence, highlight the original source, and fix any field.</p></div></li>
+          <li><span>03</span><div><h3 data-en="Export" data-zh="导出">Export</h3><p data-en="Download UTF-8 CSV for spreadsheets, expenses, or bookkeeping." data-zh="下载 UTF-8 CSV，用于表格、报销或记账。">Download UTF-8 CSV for spreadsheets, expenses, or bookkeeping.</p></div></li>
+        </ol>
+      </section>
+
+      <section class="privacy-section" id="privacy">
+        <div><p class="eyebrow" data-en="DATA HANDLING" data-zh="数据处理">DATA HANDLING</p><h2 data-en="Designed to leave less behind." data-zh="尽量少留下数据。">Designed to leave<br />less behind.</h2></div>
+        <div class="privacy-copy"><p data-en="Single-document and batch PDFs, previews, extracted results, and corrections are encrypted for up to 7 days and can be deleted sooner." data-zh="单份和批量 PDF、预览、提取结果与修改均加密保存最多 7 天，也可提前删除。">Single-document and batch PDFs, previews, extracted results, and corrections are encrypted for up to 7 days and can be deleted sooner.</p><p data-en="Only structured fields and line items you explicitly confirm are kept in the long-term ledger; the source PDF is not copied into it." data-zh="只有你明确确认的结构化字段和行项目才会沉淀到长期台账，原始 PDF 不会复制到台账。">Only structured fields and line items you explicitly confirm are kept in the long-term ledger; the source PDF is not copied into it.</p><a class="text-link" href="/privacy" data-en="Read the privacy notice →" data-zh="阅读隐私说明 →">Read the privacy notice →</a></div>
+      </section>
+
+      <section class="faq-section">
+        <div class="section-heading"><p>FAQ</p><h2 data-en="Before you upload." data-zh="上传之前。">Before you upload.</h2></div>
+        <div class="faq-list">
+          <details><summary data-en="What PDFs are supported?" data-zh="支持哪些 PDF？">What PDFs are supported?</summary><p data-en="Text-based bills and receipts work directly. Scanned pages are processed with OCR. The current limit is 20 MB and 30 pages per file." data-zh="文字型账单与收据可直接解析，扫描页会使用 OCR。当前单文件限制为 20 MB、30 页。">Text-based bills and receipts work directly. Scanned pages are processed with OCR. The current limit is 20 MB and 30 pages per file.</p></details>
+          <details><summary data-en="Does ReceiptSift provide accounting advice?" data-zh="ReceiptSift 会提供会计建议吗？">Does ReceiptSift provide accounting advice?</summary><p data-en="No. It organizes document data. Always review extracted values before using them for accounting, tax, or reimbursement." data-zh="不会。它只帮助整理单据数据。在用于会计、税务或报销前，请务必人工核对。">No. It organizes document data. Always review extracted values before using them for accounting, tax, or reimbursement.</p></details>
+          <details><summary data-en="How long does ReceiptSift keep my files?" data-zh="ReceiptSift 会将文件保留多久？">How long does ReceiptSift keep my files?</summary><p data-en="Single-document and batch source files, results, previews, and corrections are encrypted for up to 7 days; deleting an item or batch removes them sooner." data-zh="单份和批量源文件、结果、预览与修改均加密保存最多 7 天；提前删除单据或批次会更早移除这些内容。">Single-document and batch source files, results, previews, and corrections are encrypted for up to 7 days; deleting an item or batch removes them sooner.</p></details>
+        </div>
+      </section>
+
+      <section class="resource-section" aria-labelledby="resourceHeading">
+        <p class="content-label">PRACTICAL RESOURCES</p>
+        <h2 id="resourceHeading">Go from search question to finished CSV.</h2>
+        <div class="resource-grid">
+          <a class="resource-card" href="/pdf-receipt-parser"><small>FEATURE GUIDE</small><h3>PDF receipt parser</h3><p>What the parser extracts, which files it accepts, and where review still matters.</p><span>Explore the parser →</span></a>
+          <a class="resource-card" href="/receipt-to-csv"><small>WORKFLOW</small><h3>Extract receipt data to CSV</h3><p>See the current columns, sample output, and pre-export quality checks.</p><span>See the CSV workflow →</span></a>
+          <a class="resource-card" href="/guides/how-to-extract-data-from-pdf-receipts"><small>STEP-BY-STEP GUIDE</small><h3>How to extract PDF receipt data</h3><p>A six-step process from original PDF to reviewed spreadsheet rows.</p><span>Read the guide →</span></a>
+          <a class="resource-card" href="/compare/receipt-parser-vs-manual-data-entry"><small>COMPARISON</small><h3>Parser vs. manual entry</h3><p>Choose the right workflow for readable PDFs, irregular receipts, and consequential records.</p><span>Compare the methods →</span></a>
+        </div>
+      </section>
+
+      <section class="final-cta"><p data-en="Your next receipt is one upload away." data-zh="下一张收据，只差一次上传。">Your next receipt is one upload away.</p><a class="button light" href="/app" data-en="Open ReceiptSift" data-zh="打开 ReceiptSift">Open ReceiptSift</a></section>
+    </main>
+
+    <footer><a class="wordmark" href="/"><span class="mark"><i></i><i></i></span>ReceiptSift</a><nav><a href="/resources">Resources</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/cookies">Cookies</a><a href="/refunds">Refunds</a><a href="mailto:contact@example.invalid">Contact</a><a href="/app">App</a></nav><small>© 2026 ReceiptSift</small></footer>
+    <script src="/seo.js?v=2"></script>
+  </body>
+</html>

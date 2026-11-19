@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Parse text-based and scanned PDF receipts into editable merchant, date, tax, total, payment, and line-item data with source-linked review." />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="PDF Receipt Parser with Source Review | ReceiptSift" />
+    <meta property="og:description" content="Extract structured receipt fields, verify them against the original PDF, and export reviewed data to CSV." />
+    <meta property="og:url" content="{{BASE_URL}}/pdf-receipt-parser" />
+    <link rel="canonical" href="{{BASE_URL}}/pdf-receipt-parser" />
+    <title>PDF Receipt Parser with OCR &amp; CSV Export | ReceiptSift</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Outfit:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/seo.css?v=2" />
+    <link rel="stylesheet" href="/content.css?v=1" />
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","name":"ReceiptSift PDF Receipt Parser","applicationCategory":"BusinessApplication","operatingSystem":"Web","url":"{{BASE_URL}}/pdf-receipt-parser","description":"Parse PDF receipts into source-linked, editable fields and CSV."},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"{{BASE_URL}}/"},{"@type":"ListItem","position":2,"name":"PDF Receipt Parser"}]}]}</script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-nav"><a class="wordmark" href="/" aria-label="ReceiptSift home"><span class="mark"><i></i><i></i></span>ReceiptSift</a><nav aria-label="Primary navigation"><a href="/pdf-receipt-parser">Product</a><a href="/resources">Resources</a><a class="nav-cta" href="/app">Open app</a></nav></header>
+    <main class="content-main" id="main">
+      <section class="content-hero">
+        <div><p class="breadcrumb"><a href="/">Home</a> / PDF Receipt Parser</p><p class="content-label">FEATURE GUIDE</p><h1>PDF receipt parser with review built in.</h1><p class="content-summary">Extract merchant, date, receipt number, currency, subtotal, tax, total, payment method, and line items—then verify every important value before export.</p></div>
+        <aside class="content-meta"><b>Current product limits</b>PDF only · 20 MB per file · Up to 30 pages · Password-protected PDFs are rejected</aside>
+      </section>
+      <section class="quick-answer"><b>QUICK ANSWER</b><p>A PDF receipt parser turns semi-structured receipt text into named fields and rows. ReceiptSift handles embedded PDF text and uses OCR on scanned pages, but keeps review in the workflow because dates, taxes, totals, and line items can still be misread.</p></section>
+      <div class="article-shell">
+        <aside class="toc"><b>ON THIS PAGE</b><a href="#what-it-extracts">What it extracts</a><a href="#how-it-works">How it works</a><a href="#supported-files">Supported files</a><a href="#review">Source review</a><a href="#limitations">Limitations</a></aside>
+        <article class="article-body">
+          <h2 id="what-it-extracts">What the parser extracts</h2>
+          <p>Receipts look simple to a person, but their layouts vary widely. ReceiptSift normalizes the most useful fields into a consistent result instead of returning a block of OCR text.</p>
+          <div class="data-table-wrap"><table class="data-table"><thead><tr><th>FIELD</th><th>EXAMPLE</th><th>WHY REVIEW IT</th></tr></thead><tbody>
+            <tr><td>merchant</td><td>Cedar &amp; Finch Kitchen</td><td>Logos, headers, and addresses can compete for the merchant name.</td></tr>
+            <tr><td>date</td><td>2026-08-18</td><td>Order dates, payment dates, and print dates may all appear.</td></tr>
+            <tr><td>subtotal / tax / total</td><td>25.00 / 2.06 / 27.06</td><td>Tax, tips, service fees, discounts, and totals need reconciliation.</td></tr>
+            <tr><td>line items</td><td>Market salad · 1 · 12.00</td><td>Wrapped descriptions and quantity formats vary by merchant.</td></tr>
+            <tr><td>payment method</td><td>Visa •••• 4242</td><td>A receipt may show several payment references.</td></tr>
+          </tbody></table></div>
+
+          <h2 id="how-it-works">How PDF receipt parsing works</h2>
+          <ol class="step-list">
+            <li><div><h3>Validate the PDF</h3><p>The service checks the PDF signature, file size, encryption state, readability, and page count before extraction.</p></div></li>
+            <li><div><h3>Read text or run OCR</h3><p>Pages with an embedded text layer are read directly. Sparse scanned pages are rendered and processed with OCR inside the ReceiptSift service.</p></div></li>
+            <li><div><h3>Structure fields and rows</h3><p>Extraction rules identify receipt labels, values, line items, confidence signals, and normalized source coordinates.</p></div></li>
+            <li><div><h3>Review and export</h3><p>You correct uncertain fields, reconcile the amounts, and export the reviewed result to UTF-8 CSV.</p></div></li>
+          </ol>
+
+          <h2 id="supported-files">Supported PDF receipts</h2>
+          <p>ReceiptSift currently accepts one PDF at a time. It supports text-based receipts and scanned PDFs, including receipts that use common English or Chinese labels.</p>
+          <ul><li>Maximum file size: <strong>20 MB</strong></li><li>Maximum length: <strong>30 pages</strong></li><li>Embedded-text PDF: read directly</li><li>Scanned PDF: OCR fallback</li><li>Password-protected or unreadable PDF: rejected</li></ul>
+          <div class="note-box"><b>NOT CURRENTLY SUPPORTED</b><p>JPG/PNG uploads, bulk folders, password removal, and unattended accounting submission are outside the current product boundary.</p></div>
+
+          <h2 id="review">Why source-linked review matters</h2>
+          <p>OCR accuracy is only one part of the problem. The parser also has to decide which date is the transaction date, whether a fee belongs with tax, and which amount is the final total. ReceiptSift returns source coordinates and confidence with each field so the reviewer can inspect the corresponding area on the first-page preview without persisting the result.</p>
+          <p>The parser reads text from every page. The visual source preview currently shows the first page, so a field found on a later page is identified by page number rather than highlighted on-screen.</p>
+
+          <h2 id="limitations">Use the result as reviewed data</h2>
+          <p>ReceiptSift organizes receipt information; it does not provide accounting, financial, legal, or tax advice. Before using an export for reimbursement, bookkeeping, or tax work, confirm the merchant, date, currency, amounts, and line items against the original document.</p>
+          <div class="related-links"><b>KEEP READING</b><a href="/receipt-to-csv">How the receipt-to-CSV workflow is structured</a><a href="/guides/how-to-extract-data-from-pdf-receipts">Step-by-step PDF receipt extraction guide</a><a href="/compare/receipt-parser-vs-manual-data-entry">Receipt parser vs. manual data entry</a></div>
+        </article>
+      </div>
+      <section class="content-cta"><h2>Parse a receipt you can verify.</h2><p>Open the protected app, upload a PDF, and review every important field before downloading the CSV.</p><a class="button light" href="/app">Open the PDF receipt parser</a></section>
+    </main>
+    <footer><a class="wordmark" href="/"><span class="mark"><i></i><i></i></span>ReceiptSift</a><nav><a href="/resources">Resources</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a></nav><small>© 2026 ReceiptSift</small></footer>
+  </body>
+</html>

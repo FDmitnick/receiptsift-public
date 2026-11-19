@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" /><title>Create account | ReceiptSift</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Outfit:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/auth.css?v=2" />
+  </head>
+  <body>
+    <main class="auth-page">
+      <section class="auth-story"><a class="wordmark" href="/"><span class="mark"><i></i><i></i></span>ReceiptSift</a><h1>One account.<br />Clear retention.</h1><p>SINGLE-DOCUMENT AND BATCH CONTENT IS ENCRYPTED FOR UP TO 7 DAYS AND CAN BE DELETED SOONER.</p></section>
+      <section class="auth-panel">
+        <form class="auth-box" id="registerForm">
+          <a class="wordmark" href="/"><span class="mark"><i></i><i></i></span>ReceiptSift PDF</a>
+          <h2>Create your account.</h2><p>No invite code. Review recent receipts for 7 days and keep confirmed structured data in your ledger.</p>
+          <label for="email">EMAIL</label><input id="email" name="email" type="email" autocomplete="email" required autofocus />
+          <label for="password">PASSWORD · 12+ CHARACTERS</label><input id="password" name="password" type="password" autocomplete="new-password" minlength="12" maxlength="128" required />
+          <button class="primary-action" id="registerButton" type="submit">Create account</button>
+          <p class="auth-error" id="registerError" role="alert"></p>
+          <p class="auth-note">Creating an account means you accept the <a href="/terms">Terms</a> and acknowledge the <a href="/privacy">Privacy notice</a>.</p>
+          <div class="auth-links"><a href="/">← Public site</a><a href="/login">Sign in →</a></div>
+        </form>
+      </section>
+    </main>
+    <script src="/register.js?v=3"></script>
+  </body>
+</html>

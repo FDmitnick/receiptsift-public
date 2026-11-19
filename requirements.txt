@@ -1,0 +1,15 @@
+fastapi>=0.116,<1
+uvicorn[standard]>=0.35,<1
+python-multipart>=0.0.20,<1
+httpx>=0.28,<1
+PyMuPDF>=1.26,<2
+markitdown[pdf]>=0.1.7,<0.2
+rapidocr>=3.9,<4
+onnxruntime==1.20.1; sys_platform == "win32"
+onnxruntime>=1.22,<2; sys_platform != "win32"
+numpy>=1.26,<3
+pillow>=11,<13
+pwdlib[argon2]>=0.3,<1
+cryptography>=45,<47
+psycopg[binary]>=3.2,<4
+boto3>=1.40,<2

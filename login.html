@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Sign in | ReceiptSift</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Outfit:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/auth.css?v=2" />
+  </head>
+  <body>
+    <main class="auth-page">
+      <section class="auth-story">
+        <a class="wordmark" href="/"><span class="mark"><i></i><i></i></span>ReceiptSift</a>
+        <h1>Your receipts.<br />Your workspace.</h1>
+        <p data-en="YOUR RECENT RECEIPTS STAY ENCRYPTED FOR 7 DAYS. KEEP ONLY REVIEWED STRUCTURED DATA IN YOUR LEDGER." data-zh="最近单据加密保留 7 天。只有经你确认的结构化数据才会沉淀到长期台账。">YOUR RECENT RECEIPTS STAY ENCRYPTED FOR 7 DAYS. KEEP ONLY REVIEWED STRUCTURED DATA IN YOUR LEDGER.</p>
+      </section>
+      <section class="auth-panel">
+        <form class="auth-box" id="loginForm">
+          <a class="wordmark" href="/"><span class="mark"><i></i><i></i></span>ReceiptSift PDF</a>
+          <h2>Welcome back.</h2>
+          <p id="loginContext">Sign in to review your encrypted 7-day single-document history, saved ledger, and batch workspace.</p>
+          <p class="auth-notice" id="accessNotice" role="status" hidden></p>
+          <label for="email">EMAIL</label>
+          <input id="email" name="email" type="email" autocomplete="email" required autofocus />
+          <label for="password">PASSWORD</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" required />
+          <button class="primary-action" id="loginButton" type="submit">Sign in</button>
+          <p class="auth-error" id="loginError" role="alert"></p>
+          <div class="auth-links"><a href="/">← Public site</a><a href="/forgot-password">Forgot password?</a><a id="registerLink" href="/register">Create account →</a></div>
+        </form>
+      </section>
+    </main>
+    <script src="/login.js?v=6"></script>
+  </body>
+</html>

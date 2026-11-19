@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="theme-color" content="#0a0a0a" />
+    <title>Batch workspace | ReceiptSift</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Outfit:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/batch-workspace.css?v=10" />
+    <link rel="stylesheet" href="/app-shell.css?v=4" />
+  </head>
+  <body>
+    <a class="skip-link" href="#workspace" data-i18n="skip">Skip to workspace</a>
+    <header class="topbar">
+      <a class="brand" href="/batches" aria-label="ReceiptSift batch workspace"><span class="brand-mark"><i></i><i></i></span>ReceiptSift</a>
+      <nav aria-label="Product"><a href="/app" data-i18n="single">Single document</a><a class="active" aria-current="page" href="/batches" data-i18n="batch">Batch workspace</a><a href="/pricing" data-i18n="pricing">Pricing</a><a href="/account" data-i18n="account">Account</a><a href="/resources" data-app-help aria-haspopup="true" aria-expanded="false" data-i18n="help">Help</a></nav>
+      <div class="top-actions"><select class="language-button rs-locale-select" id="languageButton" data-locale-select aria-label="Choose language"><option value="en">English</option><option value="hi">हिन्दी</option><option value="es">Español</option><option value="ar">العربية</option><option value="zh">简体中文</option></select><button class="logout-button" id="batchSignOutButton" type="button" aria-label="Sign out" title="Sign out"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M8 3H4v14h4M12 6l4 4-4 4M6 10h10"/></svg></button></div>
+    </header>
+
+    <main id="workspace" class="workspace">
+      <aside class="batch-rail" aria-labelledby="batchesTitle">
+        <div class="rail-heading"><div><p data-i18n="library">BATCH LIBRARY</p><h1 id="batchesTitle" data-i18n="batches">Batches</h1></div><button class="icon-button" id="newBatchButton" type="button" aria-label="New batch">+</button></div>
+        <form class="new-batch hidden" id="newBatchForm">
+          <label for="batchName" data-i18n="batchName">Batch name</label>
+          <input id="batchName" maxlength="160" autocomplete="off" placeholder="August client receipts" />
+          <div><button type="button" id="cancelBatchButton" data-i18n="cancel">Cancel</button><button class="dark-button" type="submit" data-i18n="create">Create</button></div>
+        </form>
+        <div class="batch-list" id="batchList" aria-live="polite"><p class="muted" data-i18n="loadingBatches">Loading batches...</p></div>
+        <p class="retention-note"><b data-i18n="retention">Retention</b><span data-i18n-html="retentionText">Source PDFs: 7 days<br />Extracted results: 7 days</span></p>
+      </aside>
+
+      <section class="batch-main" aria-live="polite">
+        <div class="empty-workspace" id="emptyWorkspace">
+          <h2 data-i18n="startTitle">Start a financial-document batch.</h2><p data-i18n="startText">Create a batch, then add up to 100 PDF receipts, invoices, or bills. Processing continues in the background.</p><button class="dark-button" id="emptyCreateButton" type="button" data-i18n="createBatch">Create batch</button>
+        </div>
+
+        <div class="active-workspace hidden" id="activeWorkspace">
+          <header class="batch-header">
+            <div><p class="kicker" data-i18n="activeBatch">ACTIVE BATCH</p><h2 id="activeBatchName">Receipts</h2><p class="batch-meta" id="batchMeta"></p></div>
+            <div><div class="header-actions"><a class="outline-button disabled" id="exportButton" href="#" data-i18n="exportCsv">Download summary</a><a class="outline-button disabled" id="exportTaxButton" href="#" data-i18n="exportTax">Accountant Excel</a><details class="export-more disabled" id="moreExportsMenu"><summary data-i18n="moreExports" aria-disabled="true">More exports</summary><div class="export-menu"><a class="disabled" id="exportItemsButton" href="#" data-i18n="exportItems">Line items CSV</a><a class="disabled" id="exportJsonButton" href="#" data-i18n="exportJson">JSON data</a></div></details><button class="text-button danger" id="deleteBatchButton" type="button" data-i18n="deleteBatch">Delete batch</button></div><p class="batch-meta" data-i18n="taxDisclaimer">For bookkeeping and tax preparation; not an IRS filing.</p></div>
+          </header>
+
+          <section class="progress-ledger" aria-label="Batch progress">
+            <div class="progress-copy"><span data-i18n="progress">Processing progress</span><b id="progressRatio">0 / 0</b></div>
+            <div class="progress-track"><span id="progressBar"></span></div>
+            <div class="status-counts" id="statusCounts"></div>
+          </section>
+
+          <section class="upload-strip">
+            <input id="fileInput" class="visually-hidden" type="file" accept="application/pdf,.pdf" multiple />
+            <label id="dropZone" for="fileInput"><span class="upload-plus">+</span><strong data-i18n="dropTitle">Add financial-document PDFs</strong><small data-i18n="dropText">Drop multiple files here, or browse. Up to 20 MB per PDF.</small></label>
+            <div class="upload-feedback hidden" id="uploadFeedback" role="status"></div>
+          </section>
+
+          <section class="source-preview-panel hidden" id="sourcePreviewPanel" aria-labelledby="sourcePreviewTitle">
+            <div class="source-preview-heading">
+              <div><p class="kicker" data-i18n="sourcePreview">SOURCE DOCUMENT</p><h3 id="sourcePreviewTitle"></h3></div>
+              <div class="source-preview-pages" id="sourcePreviewPages" aria-label="Source pages"></div>
+            </div>
+            <div class="source-preview-scroll">
+              <div class="source-preview-canvas" id="sourcePreviewCanvas">
+                <img id="sourcePreviewImage" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Source document preview" />
+                <div class="source-preview-overlays" id="sourcePreviewOverlays" aria-hidden="true"></div>
+                <div class="source-preview-loading" id="sourcePreviewLoading" data-i18n="loadingPreview">Loading source page...</div>
+              </div>
+            </div>
+            <p class="source-preview-legend" id="sourcePreviewLegend"></p>
+          </section>
+
+          <section class="document-section">
+            <div class="section-heading"><div><p class="kicker" data-i18n="documentLedger">DOCUMENT LEDGER</p><h3 data-i18n="documents">Documents</h3></div><div class="section-actions"><button class="dark-button" id="startBatchButton" type="button" data-i18n="startProcessing">Start processing</button><label class="filter-label"><span data-i18n="filter">Filter</span><select id="statusFilter"><option value="all" data-i18n="all">All</option><option value="staged" data-i18n="staged">Pending confirmation</option><option value="queued" data-i18n="queued">Queued</option><option value="processing" data-i18n="processing">Processing</option><option value="needs_review" data-i18n="review">Needs review</option><option value="failed" data-i18n="failed">Failed</option><option value="ready" data-i18n="ready">Ready</option></select></label></div></div>
+            <div class="bulk-toolbar" id="bulkToolbar">
+              <label class="bulk-select-all"><input id="selectVisibleDocuments" type="checkbox" /><span data-i18n="selectVisible">Select deletable shown</span></label>
+              <span class="bulk-summary" id="bulkSelectionSummary" aria-live="polite">0 selected</span>
+              <button class="text-button danger" id="deleteSelectedButton" type="button" disabled>Delete selected</button>
+            </div>
+            <div class="document-table" id="documentTable"></div>
+          </section>
+        </div>
+      </section>
+
+      <aside class="review-panel" id="reviewPanel" aria-labelledby="reviewTitle">
+        <div class="review-empty" id="reviewEmpty"><h2 id="reviewTitle" data-i18n="reviewQueue">Exception review</h2><p data-i18n="reviewEmpty">Documents that need attention appear here. Select any row to inspect or correct it.</p></div>
+        <form class="review-form hidden" id="reviewForm">
+          <div class="review-heading"><div><p class="kicker" data-i18n="selectedReceipt">SELECTED DOCUMENT</p><h2 id="reviewFilename">document.pdf</h2></div><button class="back-to-batch" type="button" id="closeReviewButton" aria-label="Back to batch" data-i18n="backToBatch">Back to batch</button></div>
+          <p class="review-state" id="reviewState"></p>
+          <a class="source-link" id="sourceLink" target="_blank" rel="noopener" data-i18n="openSource">Open retained source PDF</a>
+          <div class="review-attention hidden" id="reviewAttention" role="status"></div>
+          <div class="review-fields" id="reviewFields"></div>
+          <p class="review-shortcuts" id="reviewPosition" aria-live="polite"></p>
+          <div class="review-actions"><button class="outline-button hidden" id="retryButton" type="button" data-i18n="retry">Retry processing</button><button class="outline-button" id="previousReviewButton" type="button" aria-keyshortcuts="Alt+ArrowUp" data-i18n="previousIssue">Previous issue</button><button class="outline-button" id="nextReviewButton" type="button" aria-keyshortcuts="Alt+ArrowDown" data-i18n="nextIssue">Next issue</button><button class="dark-button" id="saveReviewButton" type="submit" data-i18n="saveReview">Save review</button><button class="dark-button" id="saveNextReviewButton" type="submit" data-i18n="saveNext">Save &amp; next</button></div>
+        </form>
+      </aside>
+    </main>
+    <div class="toast hidden" id="toast" role="status"></div>
+    <script src="/batch-workspace.js?v=11" defer></script>
+  </body>
+</html>

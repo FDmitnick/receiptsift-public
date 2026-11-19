@@ -1,0 +1,10 @@
+services:
+  receiptsift:
+    build: .
+    ports:
+      - "127.0.0.1:4317:4317"
+    environment:
+      RECEIPTSIFT_DATA_DIR: /app/data
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped

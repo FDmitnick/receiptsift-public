@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="ReceiptSift pricing for PDF receipt and bill extraction." />
+    <title>Pricing | ReceiptSift</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Outfit:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/pricing.css?v=3" />
+    <link rel="stylesheet" href="/app-shell.css?v=4" />
+  </head>
+  <body>
+    <a class="skip-link" href="#pricingMain">Skip to pricing</a>
+    <header class="pricing-nav">
+      <div class="global-nav-inner">
+        <a class="global-brand" href="/app" aria-label="ReceiptSift single document workspace"><span class="brand-symbol"><i></i><i></i></span><span>ReceiptSift</span></a>
+        <nav class="global-links" aria-label="Product navigation"><a href="/app">Single document</a><a href="/batches">Batch workspace</a><a class="active" aria-current="page" href="/pricing">Pricing</a><a href="/account">Account</a><a href="/resources" data-app-help aria-haspopup="true" aria-expanded="false">Help</a></nav>
+        <div class="global-actions"><a class="shell-auth-action" id="pricingAuthAction" href="/login?next=/pricing">Sign in</a><select class="language-toggle rs-locale-select" id="pricingLanguageButton" data-locale-select aria-label="Choose language"><option value="en">English</option><option value="hi">हिन्दी</option><option value="es">Español</option><option value="ar">العربية</option><option value="zh">简体中文</option></select></div>
+      </div>
+    </header>
+    <main id="pricingMain">
+      <section class="pricing-hero">
+        <h1>Start clear.<br />Scale when you need it.</h1>
+        <span>Single-document and batch source files, results, and corrections are encrypted for up to 7 days and can be deleted sooner.</span>
+      </section>
+      <section class="plan-grid" aria-label="ReceiptSift plans">
+        <article class="plan-card free-card">
+          <div><p>FREE</p><h2>$0</h2><span>For trying the complete workflow.</span></div>
+          <ul>
+            <li><b id="freeDocuments">5</b> PDF documents each month</li>
+            <li>Up to <b id="freePagesPerDocument">5</b> pages per PDF and <b id="freePages">20</b> pages per month</li>
+            <li>Text and scanned PDF extraction</li>
+            <li>Source-linked review</li>
+            <li>CSV export</li>
+          </ul>
+          <a class="plan-action secondary" href="/login?registration=closed" data-registration-action>Private beta · Sign in</a>
+        </article>
+        <article class="plan-card plus-card">
+          <span class="popular-label">MOST POPULAR</span>
+          <div><p>PLUS</p><h2><small>$</small><b id="plusPrice">9</b><em>/month</em></h2><span>For regular expense and bookkeeping work.</span></div>
+          <ul>
+            <li><b id="plusDocuments">100</b> PDF documents each month</li>
+            <li><b id="plusPages">200</b> total pages each month</li>
+            <li>Up to <b id="plusPagesPerDocument">15</b> pages per PDF</li>
+            <li>Batch upload, up to <b id="plusBatchFiles">25</b> PDFs at a time</li>
+            <li>Everything in Free</li>
+          </ul>
+          <button class="plan-action primary" data-subscribe-plan="plus" type="button">Choose Plus</button>
+          <div class="paypal-slot" id="paypalPlusButtonContainer"></div>
+          <p class="checkout-message" id="plusCheckoutMessage" role="status"></p>
+        </article>
+        <article class="plan-card pro-card">
+          <div><p>PRO</p><h2><small>$</small><b id="proPrice">19</b><em>/month</em></h2><span>For high-volume and batch processing.</span></div>
+          <ul>
+            <li><b id="proDocuments">300</b> PDF documents each month</li>
+            <li><b id="proPages">500</b> total pages each month</li>
+            <li>Up to <b id="proPagesPerDocument">30</b> pages per PDF</li>
+            <li>Batch upload, up to <b id="proBatchFiles">100</b> PDFs at a time</li>
+            <li>Everything in Plus</li>
+            <li>Subscription controls in your account</li>
+          </ul>
+          <button class="plan-action primary" data-subscribe-plan="pro" type="button">Choose Pro</button>
+          <div class="paypal-slot" id="paypalProButtonContainer"></div>
+          <p class="checkout-message" id="proCheckoutMessage" role="status"></p>
+        </article>
+      </section>
+      <p class="checkout-message private-beta-note" data-registration-availability>ReceiptSift is currently in a private owner beta. Existing owner access can sign in; public registration is closed.</p>
+      <section class="limit-note">
+        <h2>Usage pauses at your monthly limit.</h2>
+        <span>ReceiptSift pauses when either the document or page allowance is reached. There are no automatic overage fees, and both allowances reset each billing month.</span>
+      </section>
+    </main>
+    <footer><span>© 2026 ReceiptSift</span><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/refunds">Refunds</a></footer>
+    <script src="/pricing.js?v=3"></script>
+  </body>
+</html>

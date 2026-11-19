@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f5f5f7" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="description" content="Turn PDF bills and receipts into reviewable, editable data with source-linked fields and CSV export, without storing receipt content." />
+    <meta property="og:title" content="ReceiptSift PDF" />
+    <meta property="og:description" content="Every receipt, perfectly clear." />
+    <title>ReceiptSift PDF | Bill &amp; receipt parser</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231d1d1f'/%3E%3Cpath d='M9 8h5v16H9zm9-4h5v20h-5z' fill='white'/%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Outfit:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css?v=8" />
+    <link rel="stylesheet" href="/app-shell.css?v=4" />
+  </head>
+  <body>
+    <a class="skip-link" href="#mainContent">跳到主要内容</a>
+    <header class="global-nav">
+      <div class="global-nav-inner">
+        <button class="global-brand" id="homeButton" aria-label="返回首页"><span class="brand-symbol"><i></i><i></i></span><span>ReceiptSift</span></button>
+        <nav class="global-links" aria-label="产品导航"><button class="active" id="navOverview" aria-current="page">单份解析</button><a href="/batches">批量工作台</a><button id="pricingButton">套餐</button><button id="accountButton">账户</button><button id="navHelp" data-app-help aria-haspopup="true" aria-expanded="false">帮助</button></nav>
+        <div class="global-actions"><select class="language-toggle rs-locale-select" id="languageToggle" data-locale-select aria-label="选择语言"><option value="en">English</option><option value="hi">हिन्दी</option><option value="es">Español</option><option value="ar">العربية</option><option value="zh">简体中文</option></select><button class="global-icon logout-button" id="logoutButton" aria-label="退出登录" title="退出登录"><svg viewBox="0 0 20 20"><path d="M8 3H4v14h4M12 6l4 4-4 4M6 10h10"/></svg></button><span class="prototype-label" id="runtimeStatus">云端保护</span></div>
+      </div>
+    </header>
+
+    <main id="mainContent">
+      <section class="upload-view" id="uploadView">
+        <section class="hero-tile product-tile-light">
+          <div class="hero-copy">
+            <h1>每一张账单，<br />都清楚了。</h1>
+            <p>从原始凭证到可编辑表格。商家、日期、金额和商品明细，几秒钟整理完成。</p>
+            <div class="hero-actions"><label class="button-primary" for="fileInput">选择 PDF</label><button class="button-secondary" id="sampleButton">查看示例</button></div>
+            <p class="hero-context">PDF 账单与收据解析 · 原文定位 · CSV 导出</p>
+            <input class="visually-hidden" id="fileInput" type="file" accept="application/pdf,.pdf" />
+          </div>
+
+          <div class="product-stage" aria-label="账单解析产品演示">
+            <div class="hero-receipt product-render">
+              <div class="mock-receipt-head"><span>RECEIPT</span><b>Cedar &amp; Finch Kitchen</b><small>08/18/2026 · 7:42 PM</small></div>
+              <div class="mock-lines"><span></span><span></span><span></span><span></span></div>
+              <div class="mock-total"><span>合计</span><b>$27.06</b></div>
+            </div>
+            <div class="extraction-float float-merchant"><span>商家</span><b>Cedar &amp; Finch Kitchen</b></div>
+            <div class="extraction-float float-total"><span>总金额</span><b>$27.06</b></div>
+            <div class="extraction-float float-state"><i>✓</i><b>6 项字段已提取</b></div>
+          </div>
+        </section>
+
+        <section class="upload-tile product-tile-dark">
+          <div class="tile-copy"><h2>把 PDF 放进来。<br />剩下的，交给ReceiptSift。</h2><p>文字型与扫描版 PDF 会在受保护的服务中解析，并加密保留最多 7 天，方便重新核对。</p></div>
+          <label class="drop-zone" id="dropZone" for="fileInput">
+            <span class="drop-icon"><svg viewBox="0 0 32 32"><path d="M7 3.5h12l6 6v19H7z"/><path d="M19 3.5v6h6M16 22V12M11.5 16.5 16 12l4.5 4.5"/></svg></span>
+            <strong>拖入 PDF，或点击选择</strong><small>单个文件不超过 20 MB</small><span class="button-primary button-on-dark">选择文件</span><span class="upload-error hidden" id="uploadError" role="alert">请选择有效的 PDF 文件。</span>
+          </label>
+        </section>
+
+        <section class="feature-tile product-tile-parchment">
+          <div class="tile-copy"><h2>数据有出处，核对有依据。</h2><p>ReceiptSift不会只给你一个答案。点击任意字段，就能看到它在原凭证中的位置。</p></div>
+          <div class="feature-visual">
+            <div class="mini-source product-render"><span>服务费</span><b>$2.06</b><i></i></div>
+            <div class="connection-line"></div>
+            <div class="mini-field"><small>税费 / 服务费</small><b>$2.06</b><span>74% · 请确认</span></div>
+          </div>
+        </section>
+
+        <section class="capability-strip">
+          <div><b>原文定位</b><span>每个字段都有来源</span></div><div><b>明细识别</b><span>商品逐行变成表格</span></div><div><b>一键导出</b><span>CSV 可继续编辑</span></div>
+        </section>
+      </section>
+
+      <section class="processing-view hidden" id="processingView" aria-live="polite">
+        <div class="processing-product-tile">
+          <div class="processing-copy"><span class="eyebrow on-dark">正在解析</span><h1>让字迹，变成数据。</h1><p id="processingFilename">示例收据.pdf</p></div>
+          <div class="processing-visual">
+            <div class="processing-document product-render"><span></span><span></span><span></span><span></span><b></b><div class="scan-cursor"></div></div>
+            <div class="processing-fields"><i>商家名称</i><i>开具日期</i><i>总金额</i></div>
+          </div>
+          <div class="progress-wrap"><div class="progress-track"><span id="progressBar"></span></div><div class="processing-status"><span id="processingStep">识别页面文字</span><b id="processingPercent">24%</b></div></div>
+        </div>
+      </section>
+
+      <section class="review-view hidden" id="reviewView">
+        <section class="review-hero product-tile-light">
+          <span class="success-kicker" id="reviewKicker">解析完成</span><h1 id="reviewTitle">你的账单，<br />已经整理好。</h1><p id="reviewSummary">正在整理提取摘要。</p>
+          <div class="file-chip"><span class="pdf-chip">PDF</span><div><b id="reviewFilename">receipt.pdf</b><small id="reviewFileMeta">1 页 · 识别完成</small><small id="reviewOrderMeta">订单编号将在解析后生成</small></div></div>
+          <div class="ephemeral-notice" role="status"><b>最近7天加密历史</b><span>PDF、预览、提取结果和修改会加密保留7天，可从账户页重新打开或提前删除。</span></div>
+          <div class="verification-notice hidden" id="verificationNotice" role="alert"><b id="verificationTitle"></b><span id="verificationText"></span></div>
+        </section>
+
+        <div class="review-mode-bar" aria-label="核对布局">
+          <div><b>选择核对方式</b><span>需要逐项检查时，使用并排比对。</span></div>
+          <div class="review-mode-switch" role="group" aria-label="核对布局">
+            <button class="active" id="flowModeButton" type="button" data-review-mode="flow" aria-pressed="true">标准模式</button>
+            <button id="compareModeButton" type="button" data-review-mode="compare" aria-pressed="false"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="3" width="6" height="14" rx="1.5"></rect><rect x="11.5" y="3" width="6" height="14" rx="1.5"></rect></svg><span>并排比对</span></button>
+          </div>
+        </div>
+
+        <div class="review-workspace" id="reviewWorkspace" data-review-mode="flow">
+          <section class="document-showcase product-tile-dark-2">
+          <div class="tile-copy on-dark-copy"><h2>原始凭证。<br />7 天内可重新核对。</h2><p>点击下方提取字段，凭证中的对应位置会立即高亮。</p></div>
+          <article class="receipt-paper product-render live-preview" id="documentPreview">
+              <img id="previewImage" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="上传凭证第一页预览" />
+            <div class="source-overlay hidden" id="sourceOverlay" aria-hidden="true"></div>
+            <pre class="preview-text hidden" id="previewText"></pre>
+          </article>
+          </section>
+
+          <section class="review-utility product-tile-parchment">
+          <div class="utility-heading"><div><h2>核对提取结果</h2><p>黑色描边表示这项数据需要你看一眼。</p></div><div class="confidence-score"><b id="confidenceScore">…</b><span>可信度</span></div></div>
+          <div class="data-pane">
+            <div class="tabs" role="tablist"><button class="active" data-tab="basic">基本信息 <span>6</span></button><button data-tab="items">商品明细 <span>4</span></button></div>
+            <div class="tab-panel" id="basicPanel">
+              <div class="field-grid">
+                <label class="field-card wide" data-field="merchant"><span>商家名称 <i id="merchantConfidence">…</i></span><input id="merchant" /></label>
+                <label class="field-card" data-field="date"><span>开具日期 <i id="dateConfidence">…</i></span><input id="date" /></label>
+                <label class="field-card" data-field="currency"><span>币种 <i id="currencyConfidence">…</i></span><select id="currency"><option value="CNY">CNY 人民币</option><option value="USD">USD 美元</option><option value="EUR">EUR 欧元</option><option value="GBP">GBP 英镑</option><option value="JPY">JPY 日元</option></select></label>
+                <label class="field-card wide" data-field="receipt_number"><span>收据编号 <i id="receiptNumberConfidence">…</i></span><input id="receiptNumber" /></label>
+                <label class="field-card" data-field="subtotal"><span>商品小计 <i id="subtotalConfidence">…</i></span><div class="money-input"><b class="currency-symbol">$</b><input id="subtotal" inputmode="decimal" /></div></label>
+                <label class="field-card" data-field="tax"><span>税费 / 服务费 <i id="taxConfidence">…</i></span><div class="money-input"><b class="currency-symbol">$</b><input id="tax" inputmode="decimal" /></div><small id="taxHint">请对照原文确认税费或附加费用。</small></label>
+                <label class="field-card" data-field="tip"><span>小费 <i id="tipConfidence">…</i></span><div class="money-input"><b class="currency-symbol">$</b><input id="tip" inputmode="decimal" /></div></label>
+                <label class="field-card amount-field" data-field="total"><span>总金额 <i id="totalConfidence">…</i></span><div class="money-input"><b class="currency-symbol">$</b><input id="total" inputmode="decimal" /></div></label>
+                <label class="field-card wide" data-field="payment_method"><span>支付方式 <i id="paymentConfidence">…</i></span><input id="payment" /></label>
+              </div>
+              <div class="field-grid dynamic-field-grid" id="specialFields"></div>
+              <div class="reconcile-card" id="reconcileCard"><span id="reconcileIcon">✓</span><div><b id="reconcileTitle">金额核对一致</b><small id="reconcileText">小计 + 税费 = 总金额</small></div></div>
+            </div>
+            <div class="tab-panel hidden" id="itemsPanel">
+              <div class="items-summary"><span>共识别 4 项商品</span><button id="addItemButton">＋ 添加一项</button></div>
+              <div class="items-table"><div class="table-row table-head"><span>项目</span><span>数量</span><span>金额</span><span></span></div><div id="itemRows"></div></div>
+              <div class="items-total"><span>商品小计</span><b id="itemsSubtotal">¥246.00</b></div>
+            </div>
+          </div>
+          </section>
+        </div>
+
+        <div class="floating-sticky-bar"><div><small>本张凭证总金额</small><b id="stickyTotal">…</b></div><div><button class="utility-button" id="newFileButton">解析另一份</button><button class="utility-button" id="resetButton">撤销修改</button><button class="utility-button" id="saveButton">应用修改</button><button class="utility-button" id="reportButton">报告结果有误</button><button class="utility-button" id="exportJsonButton">导出 JSON</button><button class="button-primary" id="exportButton">导出 CSV</button></div></div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner"><div><b>ReceiptSift PDF</b><p>把收据变成结构化数据，同时保留每一项来源。</p></div><nav aria-label="法律信息"><button id="footerPrivacy">隐私</button><button id="footerTerms">条款</button><button id="footerData">数据处理</button><a href="/cookies">Cookie 政策</a><a href="/refunds">退款政策</a><a href="mailto:contact@example.invalid">联系邮箱</a></nav><small>© 2026 ReceiptSift · 受保护的私测版</small></div>
+    </footer>
+
+    <div class="toast" id="toast" role="status"><span>✓</span><p></p></div>
+    <div class="modal-backdrop hidden" id="modalBackdrop"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="modal-close" id="modalClose" aria-label="关闭">×</button><h2 id="modalTitle">受保护的解析服务</h2><p id="modalText">PDF、预览和提取内容只用于当前解析页面，不会默认保存到账户。账户仅保留不含凭证内容的订单技术元数据。离开前请先导出 CSV。</p><button class="button-primary modal-confirm" id="modalConfirm">我知道了</button></div></div>
+    <dialog class="diagnostic-dialog" id="diagnosticDialog" aria-labelledby="diagnosticTitle">
+      <form id="diagnosticForm">
+        <button class="dialog-close" id="diagnosticClose" type="button" aria-label="关闭">×</button>
+        <p class="dialog-kicker">自愿诊断报告</p>
+        <h2 id="diagnosticTitle">帮助我们复盘错误结果</h2>
+        <p class="diagnostic-intro" id="diagnosticIntro">仅当你主动提交时，我们才会加密保存本次原始结果、当前修改和问题描述，最长保留 14 天。上传的 PDF 也会一并加密保存。</p>
+        <label class="diagnostic-field"><span>哪里不对？</span><textarea id="diagnosticDescription" minlength="3" maxlength="2000" required></textarea><small>请说明错误字段或你期望的正确结果。</small></label>
+        <label class="diagnostic-consent"><input id="diagnosticConsent" type="checkbox" required /><span>我同意为排查此问题而保存上述诊断材料，最长 14 天。我可以在账户页提前删除。</span></label>
+        <p class="diagnostic-status" id="diagnosticStatus" role="status"></p>
+        <div class="diagnostic-actions"><button class="utility-button" id="diagnosticCancel" type="button">取消</button><button class="button-primary" id="diagnosticSubmit" type="submit">加密提交报告</button></div>
+      </form>
+    </dialog>
+    <script src="./app.js?v=13"></script>
+  </body>
+</html>

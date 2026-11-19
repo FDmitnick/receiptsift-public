@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Extract receipt data to CSV: review merchant, date, currency, tax, total, payment, and line items before downloading a spreadsheet-ready UTF-8 file." />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Extract Receipt Data to CSV | ReceiptSift" />
+    <meta property="og:description" content="Turn a PDF receipt into reviewed fields and line-item rows, then download a clean UTF-8 CSV." />
+    <meta property="og:url" content="{{BASE_URL}}/receipt-to-csv" />
+    <link rel="canonical" href="{{BASE_URL}}/receipt-to-csv" />
+    <title>Extract Receipt Data to CSV | ReceiptSift</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Outfit:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/seo.css?v=2" /><link rel="stylesheet" href="/content.css?v=1" />
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Extract Receipt Data to CSV","dateModified":"2026-08-21","author":{"@type":"Organization","name":"ReceiptSift Product Team"},"url":"{{BASE_URL}}/receipt-to-csv"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"{{BASE_URL}}/"},{"@type":"ListItem","position":2,"name":"Receipt to CSV"}]}]}</script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-nav"><a class="wordmark" href="/" aria-label="ReceiptSift home"><span class="mark"><i></i><i></i></span>ReceiptSift</a><nav aria-label="Primary navigation"><a href="/pdf-receipt-parser">Product</a><a href="/resources">Resources</a><a class="nav-cta" href="/app">Open app</a></nav></header>
+    <main class="content-main" id="main">
+      <section class="content-hero"><div><p class="breadcrumb"><a href="/">Home</a> / Receipt to CSV</p><p class="content-label">WORKFLOW GUIDE</p><h1>Extract receipt data to CSV.</h1><p class="content-summary">Convert a PDF receipt into spreadsheet-ready rows without losing the review step between OCR and export.</p></div><aside class="content-meta"><b>Written and reviewed by</b>ReceiptSift Product Team<br />Based on the live CSV export schema<br />Updated August 21, 2026</aside></section>
+      <section class="quick-answer"><b>QUICK ANSWER</b><p>Upload a PDF receipt, review the extracted fields and line items against the source, correct any uncertainty, and download the result as UTF-8 CSV. Each line item becomes a row while receipt-level fields repeat, making the file easy to filter or import.</p></section>
+      <div class="article-shell">
+        <aside class="toc"><b>ON THIS PAGE</b><a href="#output">CSV output</a><a href="#workflow">Workflow</a><a href="#sample">Sample rows</a><a href="#quality">Quality checks</a><a href="#uses">Where to use it</a></aside>
+        <article class="article-body">
+          <h2 id="output">What goes into the CSV</h2>
+          <p>ReceiptSift exports reviewed receipt fields rather than raw OCR text. The current CSV schema uses the following columns:</p>
+          <div class="code-sample">merchant,date,currency,receipt_number,payment_method,item,quantity,unit_price,item_amount,subtotal,tax,total</div>
+          <p>Receipt-level values repeat for each line item. That is deliberate: every row remains understandable when it is filtered, copied, or imported into another table.</p>
+          <div class="data-table-wrap"><table class="data-table"><thead><tr><th>COLUMN GROUP</th><th>FIELDS</th><th>PURPOSE</th></tr></thead><tbody><tr><td>identity</td><td>merchant, date, receipt_number</td><td>Identify and de-duplicate the transaction.</td></tr><tr><td>payment</td><td>currency, payment_method</td><td>Keep amount and payment context together.</td></tr><tr><td>line item</td><td>item, quantity, unit_price, item_amount</td><td>Create one analyzable row per product or service.</td></tr><tr><td>totals</td><td>subtotal, tax, total</td><td>Reconcile the receipt before downstream use.</td></tr></tbody></table></div>
+
+          <h2 id="workflow">Receipt-to-CSV workflow</h2>
+          <ol class="step-list"><li><div><h3>Upload the original PDF</h3><p>Use the source PDF rather than a screenshot when possible. ReceiptSift accepts text-based and scanned PDFs up to 20 MB and 30 pages.</p></div></li><li><div><h3>Review the extracted fields</h3><p>Check merchant, transaction date, currency, receipt number, payment method, and totals. Use source highlighting and confidence as review aids.</p></div></li><li><div><h3>Check every line item</h3><p>Fix wrapped descriptions, quantities, unit prices, or amounts. Add or remove rows when the receipt layout caused a split or merge.</p></div></li><li><div><h3>Reconcile the math</h3><p>Confirm that subtotal plus tax or additional fees matches the final total, allowing for displayed rounding.</p></div></li><li><div><h3>Export the reviewed CSV</h3><p>The download uses UTF-8 with a byte-order mark so common spreadsheet applications can open multilingual merchant and item names reliably.</p></div></li></ol>
+
+          <h2 id="sample">Example CSV output</h2>
+          <div class="code-sample">merchant,date,currency,item,quantity,item_amount,subtotal,tax,total
+"Cedar &amp; Finch Kitchen",2026-08-18,USD,"Market salad",1,12.00,25.00,2.06,27.06
+"Cedar &amp; Finch Kitchen",2026-08-18,USD,"House pasta",1,13.00,25.00,2.06,27.06</div>
+          <div class="note-box"><b>EXAMPLE, NOT A TEMPLATE REQUIREMENT</b><p>Your export includes all current schema columns. Empty values remain empty rather than being invented.</p></div>
+
+          <h2 id="quality">Five checks before using the CSV</h2>
+          <ul><li>Confirm the <strong>transaction date</strong>, not merely the print or order date.</li><li>Make sure the <strong>currency</strong> matches the amount symbols and receipt context.</li><li>Separate <strong>tax, tip, and service fee</strong> according to what the receipt actually says.</li><li>Check that every <strong>line-item amount</strong> belongs to the correct description.</li><li>Reconcile <strong>subtotal + tax/fees − discounts</strong> with the final total.</li></ul>
+
+          <h2 id="uses">Where a reviewed receipt CSV helps</h2>
+          <p>A clean CSV can support expense review, reimbursement preparation, spreadsheet analysis, bookkeeping intake, or migration into another system. Import requirements vary, so map ReceiptSift's columns to the destination system and test with synthetic or low-risk data first.</p>
+          <p>ReceiptSift does not submit tax filings or make accounting classifications. Keep the original receipt as your authoritative record and have a qualified professional review consequential financial workflows.</p>
+          <div class="related-links"><b>KEEP READING</b><a href="/pdf-receipt-parser">PDF receipt parser capabilities and limits</a><a href="/guides/how-to-extract-data-from-pdf-receipts">Complete PDF receipt extraction guide</a><a href="/compare/receipt-parser-vs-manual-data-entry">Compare parsing with manual entry</a></div>
+        </article>
+      </div>
+      <section class="content-cta"><h2>Turn one receipt into reviewed rows.</h2><p>Upload the PDF, verify the extracted data, and download the current CSV schema.</p><a class="button light" href="/app">Extract receipt data to CSV</a></section>
+    </main>
+    <footer><a class="wordmark" href="/"><span class="mark"><i></i><i></i></span>ReceiptSift</a><nav><a href="/resources">Resources</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a></nav><small>© 2026 ReceiptSift</small></footer>
+  </body>
+</html>

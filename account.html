@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" /><title>Account | ReceiptSift</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Outfit:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/auth.css?v=4" />
+    <link rel="stylesheet" href="/app-shell.css?v=4" />
+  </head>
+  <body>
+    <a class="skip-link" href="#accountMain">Skip to account content</a>
+    <header class="account-nav">
+      <div class="account-nav-inner">
+        <a class="global-brand" href="/app" aria-label="ReceiptSift single document workspace"><span class="brand-symbol"><i></i><i></i></span><span>ReceiptSift</span></a>
+        <nav class="global-links" aria-label="Product navigation"><a href="/app">Single document</a><a href="/batches">Batch workspace</a><a href="/pricing">Pricing</a><a class="active" aria-current="page" href="/account">Account</a><a href="/resources" data-app-help aria-haspopup="true" aria-expanded="false">Help</a></nav>
+        <div class="global-actions"><a class="operations-action hidden" id="operationsLink" href="/admin">Operations</a><select class="language-toggle rs-locale-select" data-locale-select id="accountLanguageButton" aria-label="Choose language"><option value="en">English</option><option value="hi">हिन्दी</option><option value="es">Español</option><option value="ar">العربية</option><option value="zh">简体中文</option></select><button class="global-icon logout-button" id="signOutButton" type="button" aria-label="Sign out" title="Sign out"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M8 3H4v14h4M12 6l4 4-4 4M6 10h10"/></svg></button></div>
+      </div>
+    </header>
+    <main class="account-main" id="accountMain">
+      <section class="account-hero">
+        <div><h1>Your data,<br />accounted for.</h1></div>
+        <div class="account-identity"><small>SIGNED IN AS</small><b id="accountEmail">Loading…</b><span id="accountCreated">Private beta account</span></div>
+      </section>
+
+      <section class="metrics" aria-label="Usage this month">
+        <div class="metric"><span>RECEIPTS PARSED</span><b id="documentsParsed">…</b></div>
+        <div class="metric"><span>PAGES PROCESSED</span><b id="pagesProcessed">…</b></div>
+        <div class="metric"><span>CSV EXPORTS</span><b id="csvExports">…</b></div>
+        <div class="metric"><span>RECENT HISTORY</span><b>7 DAYS</b></div>
+      </section>
+
+      <section class="history-band" aria-labelledby="recentHistoryTitle">
+        <div class="history-heading"><div><p class="account-kicker">ENCRYPTED RECENT HISTORY</p><h2 id="recentHistoryTitle">Recent 7 days</h2></div><p>Single documents and batch results appear together here. Source PDFs, previews, extracted fields, and corrections expire automatically after 7 days.</p></div>
+        <div class="history-list" id="recentHistoryList"><p class="case-empty">Loading recent documents…</p></div>
+        <p class="status-message" id="historyStatus" role="status"></p>
+      </section>
+
+      <section class="history-band ledger-band" aria-labelledby="ledgerTitle">
+        <div class="history-heading"><div><p class="account-kicker">USER-CONFIRMED DATA</p><h2 id="ledgerTitle">Saved ledger</h2></div><p>Confirm a reviewed document to keep its structured fields and line items after the 7-day source history expires. Raw PDFs and previews are not copied into the ledger.</p></div>
+        <div class="history-list" id="ledgerList"><p class="case-empty">Loading saved ledger…</p></div>
+        <p class="status-message" id="ledgerStatus" role="status"></p>
+      </section>
+
+      <section class="billing-band" aria-label="Subscription">
+        <div>
+          <h2><span id="billingPlan">Free</span> plan</h2>
+          <p id="billingAllowance">Loading your monthly allowance…</p>
+        </div>
+        <div class="billing-actions">
+          <a class="primary-action" id="upgradePlanLink" href="/pricing">View plans</a>
+          <button class="link-button hidden" id="cancelSubscriptionButton" type="button">Cancel subscription</button>
+          <p class="status-message" id="billingStatus" role="status"></p>
+        </div>
+      </section>
+
+      <section class="diagnostic-band" aria-labelledby="diagnosticCasesTitle">
+        <div class="diagnostic-band-heading"><div><h2 id="diagnosticCasesTitle">Diagnostic cases</h2></div><p>Reports exist only when you explicitly submit one. Evidence is encrypted, expires after 14 days, and can be deleted sooner.</p></div>
+        <div class="case-list" id="diagnosticCaseList"><p class="case-empty">Loading diagnostic cases…</p></div>
+        <p class="status-message" id="diagnosticCaseStatus" role="status"></p>
+      </section>
+
+      <section class="account-grid">
+        <article class="account-section">
+          <h2>Export your data.</h2>
+          <p>Download your account profile, billing state, aggregate usage, parse-order metadata, recent-history summaries, saved-ledger summaries, and diagnostic-case metadata as JSON. Encrypted source PDFs are not included.</p>
+          <button class="primary-action" id="exportDataButton">Download account data</button>
+          <p class="status-message" id="exportStatus"></p>
+        </article>
+        <article class="account-section danger-section">
+          <h2>Delete account.</h2>
+          <p>This first cancels any active PayPal subscription, then deletes your account, recent encrypted history, saved ledger, batches, sign-in records, billing mapping, aggregate usage, order metadata, and diagnostic evidence. If PayPal cannot confirm cancellation, your account stays intact.</p>
+          <input id="deletePassword" type="password" autocomplete="current-password" placeholder="Enter your password to confirm" />
+          <button class="danger-action" id="deleteAccountButton">Delete account and all data</button>
+          <p class="status-message" id="deleteStatus" role="alert"></p>
+        </article>
+      </section>
+    </main>
+    <script src="/locale.js?v=3"></script>
+    <script src="/app-shell.js?v=3"></script>
+    <script src="/account.js?v=6"></script>
+  </body>
+</html>

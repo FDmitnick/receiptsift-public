@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="ReceiptSift Privacy Policy: what information we process, why we use it, retention, service providers, and your privacy choices." />
+    <title>Privacy Policy | ReceiptSift</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Outfit:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/legal.css?v=1" />
+  </head>
+  <body>
+    <header class="legal-nav"><a class="wordmark" href="/"><span class="mark"><i></i><i></i></span>ReceiptSift</a><nav><a href="/terms">Terms</a><a href="/cookies">Cookies</a><a href="/refunds">Refunds</a><a class="app-link" href="/app">Open app</a></nav></header>
+    <main class="legal">
+      <p class="updated">EFFECTIVE · AUGUST 24, 2026</p>
+      <h1>Privacy Policy.</h1>
+      <p class="intro">This Privacy Policy explains how ReceiptSift (“ReceiptSift,” “we,” “us,” or “our”) handles information when you visit our website or use our PDF bill and receipt parsing service.</p>
+      <div class="legal-callout"><strong>Plain-language summary:</strong> single-document and batch workflows retain encrypted source PDFs, previews, extracted results, and corrections for up to 7 days so you can return and review them. You may delete them sooner. When you explicitly confirm a document into your ledger, ReceiptSift keeps the structured fields and line items until you delete them, but does not copy the raw PDF or preview into the ledger. We also keep account, billing, security, aggregate usage, and content-free parse-order records. We do not sell personal information or use it for targeted advertising.</div>
+
+      <h2>1. Scope</h2>
+      <p>This Policy applies to the ReceiptSift public website, protected application, related APIs, and support communications. It does not apply to third-party websites or services governed by their own policies.</p>
+
+      <h2>2. Information we collect</h2>
+      <h3>Documents and extracted data</h3>
+      <ul>
+        <li>PDF bytes submitted for parsing, including text and images contained in a bill or receipt.</li>
+        <li>Extracted text, merchant, date, currency, totals, tax, payment method, line items, confidence scores, source coordinates, and user corrections.</li>
+        <li>Original filename, page count, processing method, timestamps, and a first-page preview generated for the active result page.</li>
+      </ul>
+      <h3>Access and account information</h3>
+      <p>Individual accounts use an email address, Argon2id password hash, account timestamps, and a signed access session. We do not store plaintext account passwords. Verification and password-reset links use hashed, single-use tokens. Recent single-document and batch content is linked to the account for up to 7 days so the user can resume processing and review it. Confirmed ledger entries remain linked to the account until deleted. Parse-order records contain an account ID, order ID, timestamps, page count, parser version and method, status or error code, timing and confidence metrics, warning count, and cryptographic digests of the input and output.</p>
+      <h3>Usage, device, and log information</h3>
+      <p>We and our infrastructure providers may receive IP address, browser and device type, requested URL, request time, response status, security events, and service diagnostics. The application records operational usage such as documents or pages processed. If you allow optional first-party analytics, it also records page paths, important product clicks, a random browser identifier, limited campaign or referrer labels, and the signed-in account ID when available. The application analytics tables do not store raw IP addresses, browser fingerprints, receipt contents, or filenames.</p>
+      <h3>Support and billing information</h3>
+      <p>If you contact us, we receive your email address and message. If you use the in-app “Report incorrect result” feature, your description, original extraction, current corrections, and uploaded PDF (when available) become encrypted diagnostic evidence linked to that parse order. Submitting a report is optional and requires an unchecked consent box. When paid plans become available, a payment provider may process payment details and send us transaction status, plan, invoice, and limited billing information. ReceiptSift does not intend to store full payment-card numbers.</p>
+
+      <h2>3. How we use information</h2>
+      <ul>
+        <li>Provide, secure, troubleshoot, and improve document parsing, in-page review, and browser-side export features.</li>
+        <li>Authenticate access, administer accounts and usage limits, and respond to support or privacy requests.</li>
+        <li>Process subscriptions, prevent fraud and abuse, enforce our Terms, and comply with legal obligations.</li>
+        <li>Measure consented visits, important product clicks, registration, first use, and paid conversion using limited first-party analytics. We do not use advertising trackers or behavioral advertising.</li>
+      </ul>
+
+      <h2>4. How document processing works</h2>
+      <p>The service reads an uploaded PDF, validates it, extracts its text, and may run OCR on scanned pages. If cloud extraction is enabled, rendered page images and extraction instructions are submitted to Atlas Cloud and its underlying model providers, whose separate processing, retention, region, and privacy terms apply. Both single-document and batch workflows encrypt source PDFs and results for up to 7 days. User-confirmed ledger entries preserve reviewed structured fields without preserving the source PDF. CSV exports are generated on demand and are not retained by the application.</p>
+
+      <h2>5. How we disclose information</h2>
+      <p>We may disclose information only as reasonably necessary:</p>
+      <ul>
+        <li><strong>Infrastructure and service providers.</strong> Hosting, storage, security, email, font delivery, support, optional cloud extraction, and—when enabled—payment providers process information on our behalf.</li>
+        <li><strong>Legal and safety reasons.</strong> We may disclose information when reasonably necessary to comply with law, protect rights or safety, investigate abuse, or respond to valid legal process.</li>
+        <li><strong>Business changes.</strong> Information may transfer as part of a merger, financing, acquisition, reorganization, or sale of assets, subject to applicable law.</li>
+      </ul>
+      <p>We do not sell personal information. We do not share personal information for cross-context behavioral advertising and do not use uploaded document content for advertising.</p>
+
+      <h2>6. Retention and deletion</h2>
+      <ul>
+        <li><strong>Single-PDF tool:</strong> the original PDF, structured result, corrections, and preview are not intentionally retained after the active parsing response and page.</li>
+        <li><strong>Recent source PDFs and previews:</strong> encrypted and retained for up to 7 days for both single-document and batch workflows. Deleting the recent document, batch, or account removes active source objects sooner.</li>
+        <li><strong>Recent results and corrections:</strong> encrypted and retained for up to 7 days. CSV files are generated on demand and are not retained by the application.</li>
+        <li><strong>Confirmed ledger entries:</strong> structured fields and line items explicitly confirmed by the user remain until the user deletes the ledger entry or account. Raw PDFs, previews, and extracted page text are not copied into the ledger.</li>
+        <li><strong>Parse-order metadata:</strong> retained with the account for service integrity, quota evidence, and troubleshooting. It excludes receipt content and filenames and is removed with account deletion, subject to backup or legal exceptions.</li>
+        <li><strong>Optional diagnostic evidence:</strong> encrypted and retained for no more than 14 days after an explicit in-app report. You can delete a case sooner from the account page. Account deletion also deletes active diagnostic cases.</li>
+        <li><strong>Access session:</strong> expires after the configured session period, currently up to 7 days.</li>
+        <li><strong>Account:</strong> retained until you delete it. In-app account deletion first cancels a linked PayPal subscription, then removes active batches and source objects, the active account, authentication tokens, billing mapping, and usage events.</li>
+        <li><strong>Billing, support, backup, and security records:</strong> retained only as reasonably necessary for the service, legal obligations, fraud prevention, dispute resolution, and enforcement.</li>
+        <li><strong>Optional analytics:</strong> consented page and click events are normally retained for up to 180 days. You may decline them without losing product access. Account deletion disconnects retained aggregate analytics from the deleted account.</li>
+      </ul>
+      <p>Deletion from active systems may not immediately remove information from provider backups, security logs, or records we must retain by law.</p>
+
+      <h2>7. Security</h2>
+      <p>We use safeguards designed to protect information, including HTTPS, access-controlled application routes, HTTP-only session cookies, restricted file serving, single-PDF content non-retention, and application-level encryption for batch source PDFs and diagnostic evidence. Encryption keys are stored separately from encrypted objects, and source writes fail closed when a valid key is unavailable. No transmission or storage system is completely secure. Do not upload documents you are not authorized to process, and avoid documents containing information unnecessary for your task.</p>
+
+      <h2>8. Your privacy choices and U.S. state rights</h2>
+      <p>Depending on where you live and the law that applies, you may have rights to request access, correction, deletion, or a portable copy of personal information; to opt out of certain sale, sharing, targeted advertising, or profiling; to limit certain uses of sensitive information; and to appeal a denied request. You may also have a right not to receive discriminatory treatment for exercising a privacy right.</p>
+      <p>ReceiptSift does not currently sell personal information or use it for targeted advertising. To submit a request or appeal, email <a href="mailto:contact@example.invalid">contact@example.invalid</a> with the subject “Privacy Request.” We may verify your identity and authority before acting. We will respond as required by applicable law.</p>
+
+      <h2>9. Children</h2>
+      <p>ReceiptSift is intended for business users and is not directed to children under 13. We do not knowingly collect personal information from children under 13. Users must be at least 18 years old or the age of legal majority where they live to create an account or purchase a plan.</p>
+
+      <h2>10. International use</h2>
+      <p>Information may be processed in the hosting regions used by ReceiptSift and its service providers, which may be outside your state or country and may have different data-protection laws.</p>
+
+      <h2>11. Changes to this Policy</h2>
+      <p>We may update this Policy as the product, providers, or law changes. We will post the revised Policy with a new effective date and provide additional notice when required.</p>
+
+      <h2>12. Contact</h2>
+      <p>For privacy questions or requests, contact ReceiptSift at <a href="mailto:contact@example.invalid">contact@example.invalid</a>.</p>
+      <div class="policy-links"><a href="/terms">Terms of Use</a><a href="/cookies">Cookie Policy</a><a href="/refunds">Refund Policy</a></div>
+    </main>
+    <footer class="legal-footer"><a class="wordmark" href="/"><span class="mark"><i></i><i></i></span>ReceiptSift</a><nav><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/cookies">Cookies</a><a href="/refunds">Refunds</a><a href="mailto:contact@example.invalid">Contact</a></nav><small>© 2026 ReceiptSift</small></footer>
+  </body>
+</html>
